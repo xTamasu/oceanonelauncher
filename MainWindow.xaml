@@ -1,0 +1,65 @@
+﻿<Window x:Name="LauncherWindow" x:Class="OceanOneLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OceanOneLauncher"
+        mc:Ignorable="d"
+        Title="OceanOne Launcher" Height="542.4" Width="864.8" MinWidth="864.8" MinHeight="542.4" Icon="Icon.ico" MaxWidth="864.8" MaxHeight="542.4">
+    <Window.Background>
+        <ImageBrush ImageSource="ForumBG_MG_Effekt.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="391*"/>
+            <ColumnDefinition Width="466*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+        <Image x:Name="Header" Margin="272,4,280,0" Source="Header.png" Stretch="Fill" Height="96" VerticalAlignment="Top" Grid.ColumnSpan="2" MaxWidth="319" MaxHeight="96"/>
+        <Label x:Name="VersionLabel" Content="v1.0" Margin="0,10,0,0" HorizontalAlignment="Right" Width="51" Height="30" VerticalAlignment="Top" Foreground="White" FontFamily="Adobe Caslon Pro Bold" FontSize="18" Grid.Column="1"/>
+        <Button x:Name="LaunchGameButton" Content="Spielen" Margin="0,0,10,10" Background="#FF1ACA7B" BorderThickness="0" Foreground="#FFF0F0F0" FontSize="16" HorizontalAlignment="Right" Width="125" Height="32" VerticalAlignment="Bottom" Click="LaunchGameButton_Click" Grid.Column="1"/>
+        <Button x:Name="LaunchWebsiteButton" Content="Forum öffnen" HorizontalAlignment="Left" Margin="10,0,0,10" Width="125" Background="#FF1A4FCA" BorderThickness="0" Foreground="White" FontSize="16" Height="32" VerticalAlignment="Bottom" Click="LaunchWebsiteButton_Click"/>
+        <Button x:Name="UpdateButton" Content="Updaten" Margin="0,0,150,10" Background="#FFCA8C1A" BorderThickness="0" Foreground="#FFF0F0F0" FontSize="16" HorizontalAlignment="Right" Width="125" Height="32" VerticalAlignment="Bottom" Click="UpdateButton_Click" Grid.Column="1"/>
+
+        <TabControl HorizontalAlignment="Left" Height="343" Margin="10,105,0,0" VerticalAlignment="Top" Width="838" Grid.ColumnSpan="2">
+            <TabItem Header="Informationen" Background="White">
+                <Grid Background="#FF1B1B1B">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Informationen" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Width="160" Foreground="White" FontSize="24"/>
+                    <TextBlock HorizontalAlignment="Left" FontSize="13" Margin="10,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="248" Width="812" Foreground="White"><Run Text="Willkommen im offiziellen Launcher von Ocean-One!"/><LineBreak/><Run/><LineBreak/><Run Text="Hier kannst du die aktuelle Version von Ocean-One mit direkter Anbindung an einen schnellen Server runterladen."/><Run Text=" "/><Run Text="Dies hat nicht nur den Vorteil, dass du anderen Spielern ein flüssigeres Spielerlebnis bietest, sondern du lädst die Mission Data viel schneller runter als wenn du es über ARMA direkt machst."/><Run Text=" Um "/><Run Text="deine Version zu aktualisieren drücke einfach auf &quot;Updaten&quot;."/><LineBreak/><Run/><LineBreak/><Run Text="Der Ordner zur Mission File sollte automatisch gesetzt sein. Falls dieser nicht stimmt kannst du den Pfad in den Einstellungen selbst anpassen."/><LineBreak/><Run Text="Um ARMA über diesen Launcher zu starten musst du in den Einstellungen deinen ARMA3 Ordner von Steam (&quot;steamapps/common&quot;) angeben."/><LineBreak/><Run/><LineBreak/><Run Text="Die Einstellungen findest du oben rechts, wenn du auf das Zahnrad drückst."/><LineBreak/><Run Text="Bei Fragen, gefundenen Fehlern oder Verbesserungsvorschlägen kannst du dich gerne an das Server-Team von Ocean-One wenden."/><LineBreak/><Run/><LineBreak/><Run Text="Das Ocean-One Server"/><Run Text="-T"/><Run Text="eam wünscht dir nun viel Spaß!"/></TextBlock>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Kontakt">
+                <Grid Background="#FF1B1B1B">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="165*"/>
+                        <ColumnDefinition Width="667*"/>
+                        <ColumnDefinition Width="0*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Kontakt" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Width="92" Foreground="White" FontSize="24" Height="42"/>
+                    <TextBlock HorizontalAlignment="Left" FontSize="13" Margin="10,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="248" Width="812" Foreground="White" Grid.ColumnSpan="2" MinWidth="812" MinHeight="248" MaxHeight="248" MaxWidth="812"><Run Text="Projektleitung: "/><LineBreak/><Run Text="philmrl"/><LineBreak/><Run/><LineBreak/><Run Text="Admins:"/><LineBreak/><Run Text="James Erdmann"/><LineBreak/><Run Text="Nico "/><Run Text="Dark"/><LineBreak/><Run/><LineBreak/><Run Text="Entwicklung:"/><LineBreak/><Run Text="Martin Martinez"/><LineBreak/><Run/><LineBreak/><Run Text="Support-Leitung:"/><LineBreak/><Run Text="Vincent Valentine"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Probleme?">
+                <Grid Background="#FF1B1B1B" Margin="0,0,-0.2,0.2">
+                    <Label Content="Probleme?" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Width="127" Foreground="White" FontSize="24" Height="42"/>
+                    <TextBlock HorizontalAlignment="Left" FontSize="13" Margin="10,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="248" Width="812" Foreground="White" Grid.ColumnSpan="2"><Run Text="Bei Problemen kannst du dich gerne an den Ocean-One Support wenden."/><Run Text=" Dieser ist auf Teamspeak erreichbar: ts.ocean-one.me"/><LineBreak/><Run Text="Stelle"/><Run Text=" bitte"/><Run Text=" jedoch vorher sicher, dass deine Konfiguration des Launchers stimmt, du eine aktive Internetverbindung hast und deine Firewall nicht den Launcher blockiert."/><Run Text=" "/><LineBreak/><Run/><LineBreak/><Run Text="Der Support wird dich soweit wie möglich unterstützen."/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run Text="Bitte beachte, dass der Support diesen "/><Run Text="Launcher nicht programmiert hat und daher keine Fragen zu Coding, Architektur oder sonstige Programmierfragen beantworten kann. "/><Run Text="Wende dich"/><Run Text=" "/><Run Text="hierzu bitte an Tamasu oder einen Entwickler."/></TextBlock>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="Settings" Content="" Margin="0,65,11,0" BorderBrush="#006A6AFF" Foreground="#00661212" Click="Gear_Click" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="zahnrad.png"/>
+            </Button.OpacityMask>
+            <Button.Background>
+                <ImageBrush ImageSource="zahnrad.png"/>
+            </Button.Background>
+        </Button>
+        <Label x:Name="VersionLabel_Copy" Content="made by Tamasu" Margin="0,32,0,0" HorizontalAlignment="Right" Width="93" Height="22" VerticalAlignment="Top" Foreground="White" FontFamily="Adobe Caslon Pro Bold" FontSize="10" Grid.Column="1"/>
+        <Label x:Name="VersionMissionFile" Content="aktuelle Version: 0.0" HorizontalAlignment="Left" Margin="0,461,0,0" VerticalAlignment="Top" Height="32" FontSize="15" Width="186" HorizontalContentAlignment="Right" Grid.Column="1" Foreground="White"/>
+    </Grid>
+</Window>
