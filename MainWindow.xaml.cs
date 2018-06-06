@@ -23,6 +23,8 @@ namespace OceanOneLauncher
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool updating;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -44,11 +46,22 @@ namespace OceanOneLauncher
             Launcher.LaunchWebsite();
         }
 
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        private async void UpdateButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            Launcher.Update();
+            if (updating)
+            {
+                return;
+            }
+
+            updating = true;
+            UpdateButton.Content = "Update läuft";
+            OpenFileDialog
+            await Launcher.Update();
             if(!((Launcher.ReadFile(Launcher.GetPathMissionFileVersion())) == "0.0"))
             VersionMissionFile.Content = "aktuelle Version: " + Launcher.ReadFile(Launcher.GetPathMissionFileVersion());
+
+            UpdateButton.Content = "Update";
+            updating = false;
         }
 
         private void Gear_Click(object sender, RoutedEventArgs e)

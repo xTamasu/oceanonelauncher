@@ -1,9 +1,9 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Diagnostics;
 using System.IO;
-using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using OceanOneLauncher.Properties;
 
 namespace OceanOneLauncher
 {
@@ -58,18 +58,23 @@ namespace OceanOneLauncher
             return (ReadFile(GetPathMissionFileVersion()));
         }
 
-        public static void DownloadFile(string link, string path) // Downloaded eine Datei
+        public static async Task DownloadFileAsync(string link, string path) // Downloaded eine Datei
         {
-            using (var client = new WebClient()) // Ruft einen virtuellen Webclient auf, welcher die Mission Data downloaded
+            using (var client = new HttpClient())
             {
-                client.DownloadFile(link, path);
-                
+                var httpResponse = await client.GetAsync(link).ConfigureAwait(false);
+                httpResponse.EnsureSuccessStatusCode();
+
+                using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+                {
+                    await httpResponse.Content.CopyToAsync(fileStream).ConfigureAwait(false);
+                }
             }
         }
 
-        public static bool CheckVersion() // Überprüft ob eine neue Version vorhanden ist
+        public static async Task<bool> CheckVersion() // Überprüft ob eine neue Version vorhanden ist
         {
-            DownloadFile("https://ocean-one.me/missionfile/OceanOne.Altis.VersionServer.txt", GetPathMissionFileVersionTemp());
+            await DownloadFileAsync("https://ocean-one.me/missionfile/OceanOne.Altis.VersionServer.txt", GetPathMissionFileVersionTemp());
             string newVersion = ReadFile(GetPathMissionFileVersionTemp());
             string localVersion = ReadFile(GetPathMissionFileVersion());
             if ((newVersion == localVersion) || newVersion == null)
@@ -115,7 +120,7 @@ namespace OceanOneLauncher
             Process.Start("https://ocean-one.me/");
         }
 
-        public static void Update()
+        public static async Task Update()
         {
             try
             {
@@ -123,7 +128,7 @@ namespace OceanOneLauncher
                     File.WriteAllText(GetPathMissionFileVersion(), "0.0");
 
                 string versionLocal = ReadVersion();
-                bool versionDiffernce = CheckVersion();
+                bool versionDiffernce = await CheckVersion();
                 bool update = false;
 
                 if (versionDiffernce) // Abfrage an den Benutzer zum aktualisieren
@@ -152,7 +157,7 @@ namespace OceanOneLauncher
 
                 if (update)
                 {
-                    DownloadFile("http://ocean-one.me/missionfile/OceanOne.Altis.pbo", GetPathMissionFile());
+                    await DownloadFileAsync("http://ocean-one.me/missionfile/OceanOne.Altis.pbo", GetPathMissionFile()).ConfigureAwait(false);
                     versionLocal = ReadFile(GetPathMissionFileVersionTemp());
                     File.WriteAllText(GetPathMissionFileVersion(), ReadFile(GetPathMissionFileVersionTemp()));
                     File.Delete(GetPathMissionFileVersionTemp());
